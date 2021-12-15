@@ -8,18 +8,20 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 
 
-def get_file_name(instance, filename):
+def get_file_name(instance, filename):  #unique name given for the files
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return filename
 
 
-class Photo(models.Model):
+class Photo(models.Model): #abstract class model with two fields ,
+    # on saving an object the thumbnail will automatically
+    # will be created using the photo field using pillow libraray
     photo = models.ImageField(null=True, upload_to=get_file_name,
                               validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
     thumbnail = models.ImageField(null=True, upload_to=get_file_name, editable=False)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs): #save the thumbnail image
 
         if not self.make_thumbnail():
             # set to a default thumbnail
