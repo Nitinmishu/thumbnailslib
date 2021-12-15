@@ -1,0 +1,25 @@
+# Django #
+*.pyc
+__pycache__
+media
+
+# Release files
+thumbnailerist.egg-info
+
+# Backup files #
+*.bak
+
+# If you are using PyCharm #
+.idea/
+
+# Python #
+*.py[cod]
+*$py.class
+
+# Environments
+env/
+venv/
+
+
+# Visual Studio Code #
+.vscode/
